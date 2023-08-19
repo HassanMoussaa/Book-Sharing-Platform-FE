@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
 import "./Signin.css";
 
 const Signin = () => {
@@ -10,13 +9,19 @@ const Signin = () => {
   const [password, setPassword] = useState("");
 
   const submit = async () => {
-    const result = await axios.post("http://127.0.0.1:8000/api/login", {
-      email,
-      password,
-    });
-    if (result.data.message === "success") {
-      Cookies.set("jwt_token", result.data.authorization.token, { expires: 1 });
+    try {
+      const result = await axios.post("http://localhost:8000/auth/login", {
+        email,
+        password,
+      });
+
+      localStorage.setItem("jwt_token", result.data.token);
       navigate("/Homepage");
+    } catch (error) {
+      console.error(
+        "An error occurred during login:",
+        error.response.data.message
+      );
     }
   };
 

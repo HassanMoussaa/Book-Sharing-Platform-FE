@@ -54,3 +54,26 @@
   flex-direction: row;
   gap: 5rem;
 }
+
+.message {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.message-text {
+  padding: 10px 16px;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.success {
+  background-color: #34d399; /* Green color */
+}
+
+.error {
+  background-color: #ef4444; /* Red color */
+}

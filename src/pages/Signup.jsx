@@ -5,29 +5,35 @@ import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [image, setImage] = useState(null);
+  const [resultMessage, setResultMessage] = useState("");
+  // const [image, setImage] = useState(null);
 
   const submit = async () => {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("username", username);
-    formData.append("email", email);
-    formData.append("password", password);
-    if (image) {
-      formData.append("image", image);
-    }
+    // const formData = new FormData();
+    // formData.append("first_name", first_name);
+    // formData.append("last_name", last_name);
+    // formData.append("email", email);
+    // formData.append("password", password);
+    // if (image) {
+    //   formData.append("image", image);
+    // }
 
     try {
-      const result = await axios.post(
-        "http://127.0.0.1:8000/api/register",
-        formData
-      );
-      if (result.data.message === "User created successfully") {
-        navigate("/");
+      const result = await axios.post("http://localhost:8000/users/", {
+        first_name,
+        last_name,
+        email,
+        password,
+      });
+      if (result.data.message === "User created successfully!") {
+        setResultMessage("User created successfully!");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -49,29 +55,33 @@ const Signup = () => {
         <h2>Sign Up</h2>
         <input
           type="text"
-          placeholder="Name"
-          onChange={(e) => setName(e.target.value)}
+          placeholder="First_Name"
+          onChange={(e) => setFirst_name(e.target.value)}
+          required
         />
         <input
           type="text"
-          placeholder="Username"
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Last_name"
+          onChange={(e) => setLast_name(e.target.value)}
+          required
         />
         <input
-          type="text"
+          type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        <input
+        {/* <input
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
-        />
+        /> */}
       </div>
       <div className="signin_signup">
         <div>
@@ -80,6 +90,19 @@ const Signup = () => {
         <div>
           <button onClick={submit}>Submit</button>
         </div>
+      </div>
+      <div className="message">
+        {resultMessage && (
+          <p
+            className={`message-text ${
+              resultMessage === "User created successfully!"
+                ? "success"
+                : "error"
+            }`}
+          >
+            {resultMessage}
+          </p>
+        )}
       </div>
     </div>
   );
