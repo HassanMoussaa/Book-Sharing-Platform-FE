@@ -67,13 +67,14 @@ function Post({ post }) {
     <div className='post'>
       <div className='post__header'>
         <div className='post__headerAuthor'>
-            <Avatar alt={post.user.name} src={post.user.image} />
-          {post.user.username} . <span>{new Date(post.created_at).toLocaleTimeString()}</span>
+            <Avatar alt={post.posted_by.first_name+post.posted_by.last_name} src={post.posted_by.image} />
+          {post.posted_by.first_name+" "+post.posted_by.last_name} . 
+          {/* <span>{new Date(post.created_at).toLocaleTimeString()}</span> */}
         </div>
         <MoreHorizIcon />
       </div>
       <div className='post__image'>
-        <img src={post.image_url} alt='post' />
+        <img src={post.picture} alt='post' />
       </div>
       <div className="post__footer">
         <div className="post__footerIcons">
