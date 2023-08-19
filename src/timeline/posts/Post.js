@@ -26,7 +26,7 @@ function Post({ post }) {
           },
         }
       );
-      setIsLiked(response.data.liked);
+      setIsLiked(response.data.isLiked);
     } catch (error) {
       console.error("Error checking if post is liked:", error);
     }
