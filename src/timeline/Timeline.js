@@ -2,23 +2,19 @@ import React, { useState, useEffect } from 'react';
 import "./Timeline.css"
 import Sugesstions from './Sugesstions'
 import Post from './posts/Post'
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
 function Timeline() {
+  const [posts, setPosts] = useState([]);
+  const jwtToken = localStorage.getItem("jwt_token");
 
-const [posts, setPosts] = useState([]);
-const jwtToken = Cookies.get('jwt_token');
-
-
- const fetchPosts = async () => {
+  const fetchPosts = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/posts/following', {
+      const response = await axios.get('http://localhost:8000/books/feed', {
         headers: { Authorization: `Bearer ${jwtToken}` },
       });
-      setPosts(response.data.posts);
+      setPosts(response.data); 
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
@@ -32,7 +28,7 @@ const jwtToken = Cookies.get('jwt_token');
     <div className='timeline'>
       <div className='timeline__left'>
         {posts.map(post => (
-          <Post key={post.id} post={post} /> 
+          <Post key={post._id} post={post} /> 
         ))}
       </div>
       <div className='timeline__right'>
@@ -42,4 +38,4 @@ const jwtToken = Cookies.get('jwt_token');
   );
 }
 
-export default Timeline
+export default Timeline;

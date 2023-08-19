@@ -7,11 +7,10 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import "./Post.css";
 import axios from 'axios'; 
-import Cookies from "js-cookie";
 
 function Post({ post }) {
   const [isLiked, setIsLiked] = useState(!post.is_liked);  
-  const jwtToken = Cookies.get("jwt_token");
+  const jwtToken = localStorage.getItem("jwt_token");
 
   useEffect(() => {
     checkIsLiked();
@@ -20,7 +19,7 @@ function Post({ post }) {
   const checkIsLiked = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/posts/liked/${post.id}`,
+        `http://localhost:8000/books/${post._id}/isliked`,
         {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
@@ -38,7 +37,7 @@ function Post({ post }) {
       if (isLiked) {
         
         await axios.post(
-          `http://127.0.0.1:8000/api/posts/unlike/${post.id}`,
+          `http://localhost:8000/books/${post._id}/unlike`,
           {},
           {
             headers: {
@@ -49,7 +48,7 @@ function Post({ post }) {
       } else {
        
         await axios.post(
-          `http://127.0.0.1:8000/api/posts/like/${post.id}`,
+          `http://localhost:8000/books/${post._id}/like`,
           {},
           {
             headers: {
@@ -63,6 +62,7 @@ function Post({ post }) {
       console.error("Error liking/unliking post:", error);
     }
   };
+  
   return (
     <div className='post'>
       <div className='post__header'>
@@ -90,10 +90,14 @@ function Post({ post }) {
             <BookmarkBorderIcon className="postIcon" />
           </div>
         </div>
-        Liked by {post.likes_count} people.
+        <div className="post__details">
+          <p className="post__author">{post.author}</p>
+          <p className="post__review">{post.review}</p>
+        </div>
+        Liked by {post.liked_by.length} people.
       </div>
     </div>
   );
 }
 
-export default Post
+export default Post;
