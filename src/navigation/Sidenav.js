@@ -10,6 +10,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import MenuIcon from "@mui/icons-material/Menu";
 import Modal from "./Modal"
 import SearchModal from "./SearchModal";
+import logo from "../images/logo192.png";
 
 function Sidenav() {
 
@@ -35,11 +36,7 @@ function Sidenav() {
     
   return (
     <div className='sidenav'>
-    <img
-        className="sidenav__logo"
-        src="https://www.pngkey.com/png/full/828-8286178_mackeys-work-needs-no-elaborate-presentation-or-distracting.png"
-        alt="Instagram Logo"
-      />
+    <img className="sidenav__logo" src={logo} alt=" Logo" />
 
      <div className='sidenav__buttons'>
         <button className='sidenav__button' onClick={() => window.location.reload()}>
