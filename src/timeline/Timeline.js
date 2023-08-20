@@ -5,20 +5,9 @@ import Post from './posts/Post'
 import axios from "axios";
 
 
-function Timeline() {
-  const [posts, setPosts] = useState([]);
-  const jwtToken = localStorage.getItem("jwt_token");
+function Timeline({posts, fetchPosts}) {
 
-  const fetchPosts = async () => {
-    try {
-      const response = await axios.get('http://localhost:8000/books/feed', {
-        headers: { Authorization: `Bearer ${jwtToken}` },
-      });
-      setPosts(response.data); 
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    }
-  };
+
 
   useEffect(() => {
     fetchPosts();

@@ -12,7 +12,7 @@ import Modal from "./Modal"
 import SearchModal from "./SearchModal";
 import logo from "../images/logo192.png";
 
-function Sidenav() {
+function Sidenav({fetchPosts}) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
@@ -33,13 +33,14 @@ function Sidenav() {
   const closeSearchModal = () => {
     setIsSearchModalOpen(false);
   };
+
     
   return (
     <div className='sidenav'>
     <img className="sidenav__logo" src={logo} alt=" Logo" />
 
      <div className='sidenav__buttons'>
-        <button className='sidenav__button' onClick={() => window.location.reload()}>
+        <button className='sidenav__button' onClick={() => fetchPosts()}>
             <HomeIcon />
             <span>Home</span>    
         </button>
