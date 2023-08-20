@@ -9,7 +9,12 @@ import "./Post.css";
 import axios from 'axios'; 
 
 function Post({ post }) {
-  const [isLiked, setIsLiked] = useState(!post.is_liked);  
+  const [isLiked, setIsLiked] = useState(!post.is_liked); 
+  const [isCommenting, setIsCommenting] = useState(false); 
+  const [commentsVisible, setCommentsVisible] = useState(false); 
+   const [newComment, setNewComment] = useState('');
+  const [updatedPost, setUpdatedPost] = useState(post);
+
   const jwtToken = localStorage.getItem("jwt_token");
 
   useEffect(() => {
@@ -62,6 +67,51 @@ function Post({ post }) {
       console.error("Error liking/unliking post:", error);
     }
   };
+
+
+   const handleCommentClick = () => {
+    setIsCommenting(true);
+  };
+
+  const handleViewCommentsClick = () => {
+    setCommentsVisible(!commentsVisible);
+    
+  };
+
+  const handleCloseCommentPopup = () => {
+    setIsCommenting(false);
+    setNewComment('');
+  };
+  
+const handleCommentSubmit = async () => {
+    try {
+      await axios.post(
+        `http://localhost:8000/books/addComment/${post._id}`,
+        { content: newComment },
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+      const newCommentData = {
+      author: `${post.posted_by.first_name} ${post.posted_by.last_name}`,
+      content: newComment,  
+         };
+      setNewComment('');
+      setIsCommenting(false); // Close the comment pop-up
+      setCommentsVisible(true); // Show comments section
+      
+      setUpdatedPost((prevPost) => ({
+      ...prevPost,
+      comments: [...prevPost.comments, newCommentData],
+    }));
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+  };
+
+
   
   return (
     <div className='post'>
@@ -84,7 +134,7 @@ function Post({ post }) {
                 ) : (
                   <FavoriteBorderIcon className="postIcon" onClick={handleLikeClick} />
                 )}
-            <ChatBubbleOutlineIcon className="postIcon" />
+            <ChatBubbleOutlineIcon className="postIcon" onClick={handleCommentClick} />
             <TelegramIcon className="postIcon" />
           </div>
           <div className="post__iconSave">
@@ -96,8 +146,43 @@ function Post({ post }) {
           <p className="post__review">{post.review}</p>
         </div>
         Liked by {post.liked_by.length} people.
+       </div>
+
+      <div className="post__comments">
+          <button onClick={handleViewCommentsClick}>
+            {commentsVisible ? "Hide Comments" : "View Comments..."}
+          </button>
+          {commentsVisible && (
+            <div className="commentList">
+              {updatedPost.comments.map((comment) => (
+                <div key={comment._id} className="comment">
+                  <p>{comment.author}</p>
+                  <p>{comment.content}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+       
+      {isCommenting  && (
+        
+          <>
+          <div className="overlay" onClick={handleCloseCommentPopup} />
+          <div className="commentPopup">
+            <textarea
+              placeholder="Add your comment..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <button onClick={handleCommentSubmit}>Add Comment</button>
+            <button onClick={handleCloseCommentPopup}>Cancel</button>
+          </div>
+        </>
+      )}
+
+
       </div>
-    </div>
   );
 }
 
