@@ -34,7 +34,9 @@ const Signup = () => {
         }, 3000);
       }
     } catch (error) {
-      console.error("Error during registration:", error);
+      if (error.response.data.message) {
+        setResultMessage(error.response.data.message);
+      }
     }
   };
 
