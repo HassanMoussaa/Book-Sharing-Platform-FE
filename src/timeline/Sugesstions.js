@@ -9,17 +9,6 @@ function Suggestions() {
 
   useEffect(() => {
     fetchAllUsers();
-    
-    // const updatedUsers = allUsers.map(user => {
-    //   const followStatus = localStorage.getItem(`followStatus_${user._id}`);
-    //   if (followStatus === 'followed') {
-    //     return { ...user, is_followed: true };
-    //   } else if (followStatus === 'unfollowed') {
-    //     return { ...user, is_followed: false };
-    //   }
-    //   return user;
-    // });
-    // setAllUsers(updatedUsers);
   }, []);
 
   const fetchAllUsers = async () => {

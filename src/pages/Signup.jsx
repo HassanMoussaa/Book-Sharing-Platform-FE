@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Signup.css";
+import logo from "../images/logo192.png";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -46,11 +47,7 @@ const Signup = () => {
 
   return (
     <div className="signup_container">
-      <img
-        className="sidenav__logo"
-        src="https://www.pngkey.com/png/full/828-8286178_mackeys-work-needs-no-elaborate-presentation-or-distracting.png"
-        alt="Instagram Logo"
-      />
+      <img className="sidenav__logo" src={logo} alt=" Logo" />
       <div>
         <h2>Sign Up</h2>
         <input
