@@ -18,17 +18,12 @@ function Suggestions() {
           Authorization: `Bearer ${jwtToken}`,
         },
       });
-      const updatedUsers = response.data.map(user => {
-        const followStatus = localStorage.getItem(`followStatus_${user._id}`);
-        return { ...user, is_followed: followStatus === 'followed' };
-      });
-
-      setAllUsers(updatedUsers);
+      
+      setAllUsers(response.data);
     } catch (error) {
       console.error("Error fetching all users:", error);
     }
   };
-
 
   const handleFollow = async (userId) => {
     try {
@@ -37,10 +32,12 @@ function Suggestions() {
           Authorization: `Bearer ${jwtToken}`,
         },
       });
-    
-      localStorage.setItem(`followStatus_${userId}`, 'followed');
-    
-      setAllUsers(allUsers.map(user => user._id === userId ? { ...user, is_followed: true } : user));
+
+      setAllUsers(prevUsers =>
+        prevUsers.map(user =>
+          user._id === userId ? { ...user, is_followed: true } : user
+        )
+      );
     } catch (error) {
       console.error("Error following user:", error);
     }
@@ -53,10 +50,12 @@ function Suggestions() {
           Authorization: `Bearer ${jwtToken}`,
         },
       });
-   
-      localStorage.setItem(`followStatus_${userId}`, 'unfollowed');
-     
-      setAllUsers(allUsers.map(user => user._id === userId ? { ...user, is_followed: false } : user));
+
+      setAllUsers(prevUsers =>
+        prevUsers.map(user =>
+          user._id === userId ? { ...user, is_followed: false } : user
+        )
+      );
     } catch (error) {
       console.error("Error unfollowing user:", error);
     }
