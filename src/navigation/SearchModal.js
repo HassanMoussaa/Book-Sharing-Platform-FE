@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import "./Modal.css";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 import axios from "axios";
 
 function SearchModal({ onClose, onSearch }) {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const jwtToken = Cookies.get("jwt_token");
+  const jwtToken = localStorage.getItem("jwt_token");
 
   const handleSearch = async () => {
     // if (!searchQuery) return;
