@@ -18,10 +18,7 @@ const Signin = () => {
       localStorage.setItem("jwt_token", result.data.token);
       navigate("/Homepage");
     } catch (error) {
-      console.error(
-        "An error occurred during login:",
-        error.response.data.message
-      );
+      console.error("An error occurred during login:", error);
     }
   };
 

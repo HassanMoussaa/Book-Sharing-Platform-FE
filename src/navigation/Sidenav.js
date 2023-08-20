@@ -82,7 +82,7 @@ function Sidenav() {
          {/* for modal work */}
           {isModalOpen && <Modal onClose={handleModalClose} />}
          
-          {/* Search Modal */}
+          {/* for search modal */}
           {isSearchModalOpen && <SearchModal onClose={closeSearchModal} />}
 
 

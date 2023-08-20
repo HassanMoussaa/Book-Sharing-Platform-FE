@@ -9,39 +9,36 @@ function SearchModal({ onClose, onSearch }) {
   const navigate = useNavigate();
   const jwtToken = Cookies.get("jwt_token");
 
-  
   const handleSearch = async () => {
-    if (!searchQuery) return; 
-   try {
-     const formData = new FormData();
-     formData.append("query", searchQuery);
+    // if (!searchQuery) return;
 
-     const response = await axios.post(
-      "http://127.0.0.1:8000/api/search/users",
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+   try {
+    const params = searchQuery ? { keywords: searchQuery } : {};
+    
+    const response = await axios.get("http://localhost:8000/books/search", {
+      params,
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    });
+
       if (response) {
-        const users = response.data.users;
-        navigate("/SearchResults", { state: { users } });
-        
+        const searchResults = response.data; 
+        navigate("/SearchResults", { state: { searchResults } });
       }
     } catch (error) {
-      console.error("Error searching for users:", error);
+      console.error("Error searching for books:", error);
     }
+
     onClose();
   };
+
   return (
     <div className="modal__overlay">
       <div className="modal__content">
         <input
           type="text"
-          placeholder="Search users..."
+          placeholder="Search books..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />

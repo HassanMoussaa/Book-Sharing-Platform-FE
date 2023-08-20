@@ -18,6 +18,9 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   width: 400px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .modal__content h2 {
