@@ -12,16 +12,13 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [resultMessage, setResultMessage] = useState("");
   // const [image, setImage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const submit = async () => {
-    // const formData = new FormData();
-    // formData.append("first_name", first_name);
-    // formData.append("last_name", last_name);
-    // formData.append("email", email);
-    // formData.append("password", password);
-    // if (image) {
-    //   formData.append("image", image);
-    // }
+    if (!first_name || !last_name || !email || !password) {
+      setErrorMessage("Please fill out all fields.");
+      return;
+    }
 
     try {
       const result = await axios.post("http://localhost:8000/users/", {
@@ -80,6 +77,7 @@ const Signup = () => {
           onChange={(e) => setImage(e.target.files[0])}
         /> */}
       </div>
+      {errorMessage && <p className="error_message">{errorMessage}</p>}
       <div className="signin_signup">
         <div>
           <button onClick={goToSignIn}>Back</button>

@@ -8,8 +8,14 @@ const Signin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const submit = async () => {
+    if (!email || !password) {
+      setError("Please provide both email and password.");
+      return;
+    }
+
     try {
       const result = await axios.post("http://localhost:8000/auth/login", {
         email,
@@ -19,6 +25,7 @@ const Signin = () => {
       localStorage.setItem("jwt_token", result.data.token);
       navigate("/Homepage");
     } catch (error) {
+      setError("An error occurred during login.");
       console.error("An error occurred during login:", error);
     }
   };
@@ -51,6 +58,7 @@ const Signin = () => {
           }}
         />
       </div>
+      {error && <p className="error_message">{error}</p>}
       <div className="signin_signup">
         <div>
           <button onClick={submit}>Sign In</button>
