@@ -33,7 +33,7 @@
 .signup_container button {
   width: 8rem;
   height: 2.5rem;
-  background-color: #4caf50;
+  background-color: #2421df;
   color: white;
   border: none;
   border-radius: 3px;
@@ -42,11 +42,11 @@
 }
 
 .signup_container button:hover {
-  background-color: #45a049;
+  background-color: #160076;
 }
 
 .signup_container button:active {
-  background-color: #3e8e41;
+  background-color: #160076;
 }
 
 .signin_signup {

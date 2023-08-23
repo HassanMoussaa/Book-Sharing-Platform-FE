@@ -29,7 +29,7 @@
 .signin_container button {
   width: 8rem;
   height: 2.5rem;
-  background-color: #4caf50;
+  background-color: #2421df;
   color: white;
   border: none;
   border-radius: 3px;
@@ -38,11 +38,11 @@
 }
 
 .signin_container button:hover {
-  background-color: #45a049;
+  background-color: #160076;
 }
 
 .signin_container button:active {
-  background-color: #45a049;
+  background-color: #160076;
 }
 
 .signin_signup {
@@ -53,8 +53,9 @@
 }
 
 .sidenav__logo {
-  width: 120px;
+  width: 150px;
   margin: 25px;
+  border-radius: 50%;
 }
 
 .error {
