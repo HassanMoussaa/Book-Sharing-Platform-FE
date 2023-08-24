@@ -131,3 +131,7 @@ h1 {
 .back-button:active {
   background-color: #3735aa;
 }
+
+.posted-by {
+  color: #000000;
+}

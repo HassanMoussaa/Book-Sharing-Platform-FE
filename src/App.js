@@ -4,6 +4,7 @@ import Signin from "./pages/Signin"
 import Homepage from './Homepage';
 import SearchResults from './pages/SearchResults';
 import Signup from './pages/Signup';
+import UserFeed from './pages/UserFeed';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
           <Route index element={<Homepage/>} />
         </Route>
         <Route path='/SearchResults' element={<SearchResults />} />
+        <Route path='/user/posts' element={<UserFeed />} />
+
         <Route path='*' element={<h1>404</h1>} />
       </Routes>
     </BrowserRouter>

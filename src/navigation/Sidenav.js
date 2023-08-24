@@ -11,6 +11,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Modal from "./Modal"
 import SearchModal from "./SearchModal";
 import logo from "../images/download (1).png";
+import { useNavigate } from "react-router-dom";
+
 
 function Sidenav({fetchPosts}) {
 
@@ -33,7 +35,7 @@ function Sidenav({fetchPosts}) {
   const closeSearchModal = () => {
     setIsSearchModalOpen(false);
   };
-
+  const navigate = useNavigate();
     
   return (
     <div className='sidenav'>
@@ -56,20 +58,20 @@ function Sidenav({fetchPosts}) {
             <span>Explore</span>    
         </button>
 
-         <button className='sidenav__button'>
+         {/* <button className='sidenav__button'>
             <SlideshowIcon />
             <span>Reels</span>    
-        </button>
+        </button> */}
 
 
-          <button className='sidenav__button'>
+          {/* <button className='sidenav__button'>
             <ChatIcon />
             <span>Messages</span>    
-        </button>
+        </button> */}
 
-         <button className='sidenav__button'>
-            <FavoriteBorderIcon />
-            <span>Notifications</span>    
+        <button className='sidenav__button' onClick={() => navigate("/user/posts")}>
+          <FavoriteBorderIcon />
+          <span>My Posts</span>
         </button>
 
         < button className='sidenav__button' onClick={handleCreateClick}>
