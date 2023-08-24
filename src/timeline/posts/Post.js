@@ -118,7 +118,7 @@ const handleCommentSubmit = async () => {
       <div className='post__header'>
         <div className='post__headerAuthor'>
             <Avatar alt={post.posted_by.first_name+post.posted_by.last_name} src={post.posted_by.image} />
-          {post.posted_by.first_name+" "+post.posted_by.last_name} . 
+          {post.posted_by.first_name+" "+post.posted_by.last_name}  
           {/* <span>{new Date(post.created_at).toLocaleTimeString()}</span> */}
         </div>
         <MoreHorizIcon />
@@ -142,8 +142,8 @@ const handleCommentSubmit = async () => {
           </div>
         </div>
         <div className="post__details">
-          <p className="post__author">{post.author}</p>
-          <p className="post__review">{post.review}</p>
+          <p className="post__author"> <b>Auther: </b> {post.author}</p>
+          <p className="post__review"><b>Review: </b>{post.review}</p>
         </div>
         Liked by {post.liked_by.length} people.
        </div>

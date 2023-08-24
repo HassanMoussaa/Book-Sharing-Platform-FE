@@ -61,8 +61,10 @@ function Modal({ onClose }) {
         <input type="text" placeholder="Title" value={title} onChange={handleTitleChange} />
         <input type="text" placeholder="Author" value={author} onChange={handleAuthorChange} />
         <textarea placeholder="Review" value={review} onChange={handleReviewChange} />
+        <div className="upload_close">
         <button onClick={handleUpload}>Upload</button>
         <button onClick={onClose}>Close</button>
+        </div>
         {isUploaded && <p className="success-message">Post uploaded successfully!</p>}
       </div>
     </div>

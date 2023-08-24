@@ -7,7 +7,7 @@
 }
 
 .book-card {
-  background: radial-gradient(
+  /* background: radial-gradient(
       circle farthest-corner at 35% 90%,
       #fec564,
       transparent 50%
@@ -32,8 +32,9 @@
       #e33f5f 50%,
       #f77638 70%,
       #fec66d 100%
-    );
+    ); */
 
+  background-color: rgb(231, 231, 231);
   border: 1px solid #dbdbdb;
   border-radius: 8px;
   padding: 20px;
@@ -83,7 +84,7 @@ h1 {
 }
 
 .back-button {
-  background: radial-gradient(
+  /* background: radial-gradient(
       circle farthest-corner at 35% 90%,
       #fec564,
       transparent 50%
@@ -108,9 +109,9 @@ h1 {
       #e33f5f 50%,
       #f77638 70%,
       #fec66d 100%
-    );
+    ); */
 
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: bold;
   border: none;
   padding: 10px 20px;
@@ -120,7 +121,7 @@ h1 {
 }
 
 .back-button:hover {
-  background-color: #45a049;
+  background-color: #3735aa;
 }
 
 .back-button:focus {
@@ -128,5 +129,5 @@ h1 {
 }
 
 .back-button:active {
-  background-color: #3e8e41;
+  background-color: #3735aa;
 }

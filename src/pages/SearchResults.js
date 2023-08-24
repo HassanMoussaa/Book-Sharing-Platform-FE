@@ -26,9 +26,9 @@ function SearchResults() {
               alt={book.title}
             />
             <div className="book-details">
-              <h3 className="book-title">{book.title}</h3>
-              <p className="book-author">{book.author}</p>
-              <p className="book-review">{book.review}</p>
+              <h4 className="book-title">Title: {book.title}</h4>
+              <p className="book-author"> <b>Auther:</b> {book.author}</p>
+              <p className="book-review"> <b>Review:</b> {book.review}</p>
             </div>
           </li>
         ))}
