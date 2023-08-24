@@ -99,8 +99,8 @@ const handleCommentSubmit = async () => {
       content: newComment,  
          };
       setNewComment('');
-      setIsCommenting(false); // Close the comment pop-up
-      setCommentsVisible(true); // Show comments section
+      setIsCommenting(false); 
+      setCommentsVisible(true); 
       
       setUpdatedPost((prevPost) => ({
       ...prevPost,
